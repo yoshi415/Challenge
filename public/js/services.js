@@ -39,6 +39,17 @@ angular.module('challengeApp.services', [])
     };
   })
 .factory('ChallengeFactory', function($http) {
+
+      var getChallengeUser = function(challengeId,callback){
+      $http.post('/api/1/getChallengeUser', {
+        challengeId: challengeId
+      }).then(function(data) {
+        callback(data);
+      })
+    };
+
+
+
     var getChallengeInfo = function(challengeId) {
       return $http({
         method: 'GET',
@@ -48,10 +59,11 @@ angular.module('challengeApp.services', [])
       });
     };
 
-    var acceptChallenge = function(challengeId) {
+    var acceptChallenge = function(challengeId, userId) {
       return $http({
-        method: 'PUT',
+        method: 'POST',
         url: '/api/1/challenge/' + challengeId + '/accept',
+        data: {user_id: userId}
       }).then(function(resp) {
         return resp.data;
       });
@@ -110,10 +122,10 @@ angular.module('challengeApp.services', [])
       });
     };
 
-    var upvoteUser = function(challengeId, targetUserId) {
+    var upvoteUser = function(challengeId, targetUserId, userId) {
       return $http({
         method: 'POST',
-        data: {'targetUserId': targetUserId},
+        data: {'targetUserId': targetUserId, user_id: userId},
         url: 'api/1/challenge/' + challengeId + '/upvote'
       }).then(function (resp) {
         return resp.data;
@@ -122,6 +134,7 @@ angular.module('challengeApp.services', [])
 
 
     return {
+      getChallengeUser:getChallengeUser,
       getChallengeInfo: getChallengeInfo,
       acceptChallenge: acceptChallenge,
       challengeStart: challengeStart,
@@ -207,7 +220,19 @@ angular.module('challengeApp.services', [])
     })
   };
 
+  var uploadChallengeImage = function(image,userId,challengeId) {
+    $http.post('/api/1/ChallengeImage', {
+      image: image,
+      userId:userId,
+      challengeId:challengeId
+    })
+    .success(function(data) {
+      return data;
+    })
+  };
+
   return {
+    uploadChallengeImage:uploadChallengeImage,
     uploadImage:uploadImage,
     getUserChallenges:getUserChallenges,
     getUserInfo: getUserInfo,

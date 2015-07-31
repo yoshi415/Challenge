@@ -13,7 +13,6 @@ angular.module('challengeApp.createChallenge', ['isteven-multi-select'])
       $scope.participants.push(user)
     });
   });
-  console.log($scope.loginUser)
 
   $scope.postChallenge = function(challengeInfo){
     challengeInfo.title = challengeInfo.title|| "untitled";

@@ -25,6 +25,8 @@ angular.module('challengeApp.detail', [])
     .then(function () {
       $scope.getChallengeInfo($scope.challenge);
     });
+    console.log(challengeData)
+    
   };
 
   $scope.accept = function () {
@@ -35,5 +37,10 @@ angular.module('challengeApp.detail', [])
     });
     $scope.hasAccepted = true;
   };
+  
+  // $scope.showTimer = false;
+  // $scope.toggleTimer = function() {
+  //   $scope.showTimer = !$scope.showTimer;
+  // }
 
 }]);

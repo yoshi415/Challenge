@@ -1,8 +1,10 @@
 
 
 <div class="boxed-group-detail">
-  <h3>State: {{started}}</h3>
-  <h3 ng-show="started==='Completed'">Winner is {{winner.username}}</h3>
+  <h3 >State: {{started}}</h3>
+  <h3>Time Left: {{100000000000 | date : 'medium' }} </h3>
+  <h3 ng-show="started === 'Started'">Time Left: </h3> 
+  <h3 ng-show="started === 'Completed'">Winner is {{winner.username}}</h3>
   <button ng-click="accept()" ng-show="!hasAccepted && isParticipant">ACCEPT</button>
     <ul class="playContainer">
       <li class="playerItem" ng-repeat="player in players">

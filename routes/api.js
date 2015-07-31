@@ -129,6 +129,7 @@ var makeChallengeObj = function (challengeModel, rawParticipants) {
     date_created: challengeModel.get('createdAt'),
     date_completed: challengeModel.get('date_completed'),
     date_started: challengeModel.get('date_started'),
+    time: challengeModel.get('time'),
     participants: participants
   };
 };
@@ -245,6 +246,7 @@ var challenge_form_is_valid = function(form) {
  */
 router.post('/create_challenge', requires_login, function(req, res) {
   var form = req.body.challengeInfo;
+  console.log("REQSESSION: ", req.session)
 
   console.log(req.body.challengeInfo);
 
